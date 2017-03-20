@@ -47,6 +47,9 @@ public class KeepAliveActivity extends Activity{
                 LogUtil.log(TAG,"USERPRESENT!!!!!!!!!!!!!!!!!!!!!!!");
                 stopme();
             }
+            @Override
+            public void onNewDayCome() {
+            }
         });
 
     }

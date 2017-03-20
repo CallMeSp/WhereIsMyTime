@@ -58,6 +58,7 @@ public class ScreenObserver {
             filter.addAction(Intent.ACTION_SCREEN_ON);
             filter.addAction(Intent.ACTION_SCREEN_OFF);
             filter.addAction(Intent.ACTION_USER_PRESENT);
+            filter.addAction(Intent.ACTION_DATE_CHANGED);
             mContext.registerReceiver(mScreenReceiver, filter);
         }
     }
@@ -80,6 +81,8 @@ public class ScreenObserver {
                 mScreenStateListener.onScreenOff();
             } else if (Intent.ACTION_USER_PRESENT.equals(action)) { // 解锁
                 mScreenStateListener.onUserPresent();
+            }else if (Intent.ACTION_DATE_CHANGED.equals(action)){//日期更换
+                mScreenStateListener.onNewDayCome();
             }
         }
     }
@@ -90,5 +93,7 @@ public class ScreenObserver {
         void onScreenOff();
 
         void onUserPresent();
+
+        void onNewDayCome();
     }
 }
