@@ -1,15 +1,17 @@
 package com.sp.whereismytime;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,21 +19,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.sp.whereismytime.adapter.MainRecyclerAdapter;
 import com.sp.whereismytime.base.BaseActivity;
 import com.sp.whereismytime.base.LogUtil;
 
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private MainRecyclerAdapter adapter;
+    private ArrayList<String> list=new ArrayList<>();
     @BindView(R.id.img_background)ImageView imageView;
     @BindView(R.id.today_count)TextView textView_count;
     @BindView(R.id.thisusetate)TextView textView_thisusestate;
+    @BindView(R.id.recyclerview)RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +63,13 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
+        //RecyclerView
+        adapter=new MainRecyclerAdapter(this,get());
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,11 +126,27 @@ public class MainActivity extends BaseActivity
         return true;
 
     }
-
     @Override
     protected void onResume() {
         super.onResume();
-        textView_count.setText("今日使用次数："+getCount());
+        makeAnimationTextcount(getCount());
+        LogUtil.log("???",get().toString());
+        adapter.notifyDataSetChanged();
         textView_thisusestate.setText("本次使用开始时间："+getThisUseStartTime());
+    }
+
+    //数值变化的动画效果
+    private void makeAnimationTextcount(final int count){
+        ValueAnimator numanimator=ValueAnimator.ofInt(0,count);
+        numanimator.setDuration(500);
+        numanimator.setRepeatCount(0);
+        numanimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int current=(int)animation.getAnimatedValue();
+                textView_count.setText(""+current);
+            }
+        });
+        numanimator.start();
     }
 }

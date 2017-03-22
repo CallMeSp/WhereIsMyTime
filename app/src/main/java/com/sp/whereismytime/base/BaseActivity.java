@@ -37,7 +37,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private volatile int year,month,date;
 
-    private volatile ArrayList<String> TimeUseCount=new ArrayList<>();
+    private  static ArrayList<String> TimeUseCount=new ArrayList<String>();
 
     private DBHelper dbHelper;
 
@@ -50,35 +50,31 @@ public class BaseActivity extends AppCompatActivity {
         //初始化DBHelper
         dbHelper=new DBHelper(this);
         cursor=dbHelper.select();
-
         observer=new ScreenObserver(this);
         observer.startObserver(new ScreenObserver.ScreenStateListener() {
             @Override
             public void onScreenOn() {
                 LogUtil.log(TAG,"ON!!!!!!!!!!!!!!!!!!!!!!!");
                 firstopentime=getCurrentTime();
+                if (starttime==null){
+                    starttime=getCurrentTime();
+                }
             }
             @Override
             public void onScreenOff() {
-                LogUtil.log(TAG,"OFF!!!!!!!!!!!!!!!!!!!!!!!");
+
                 if (starttime!=null){
                     endtime=getCurrentTime();
                 }
+                TimeUseCount.add("from: "+starttime+" to: "+endtime);
+                LogUtil.log(TAG,"OFF!!!!!!!!!!!!!!!!!!!!!!!"+"  this use:"+starttime+"  "+endtime+"  size"+TimeUseCount.size());
                 KeepAliveActivity.Start(context);
             }
             @Override
             public void onUserPresent() {
                 count++;
-                if (newstart!=null){
-                    starttime=newstart;
-                }else {
-                    starttime=getCurrentTime();
-                }
-                newstart=getCurrentTime();
-                if (endtime!=null){
-                    TimeUseCount.add("from:"+starttime+" to:"+endtime);
-                }
-                LogUtil.log(TAG,"UserPresent!!!!!!!!!!!!!!!!!!!!!!!");
+                starttime=getCurrentTime();
+                LogUtil.log(TAG,"UserPresent!!!!!!!!!!!!!!!!!!!!!!!"+TimeUseCount.size());
             }
             @Override
             public void onNewDayCome() {
@@ -100,7 +96,7 @@ public class BaseActivity extends AppCompatActivity {
     }
     //获取系统当前时间
     private String getCurrentTime(){
-        SimpleDateFormat formatter=new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter=new SimpleDateFormat("HH:mm:ss");
         Date curDate =  new Date(System.currentTimeMillis());
         return formatter.format(curDate);
     }
@@ -114,7 +110,7 @@ public class BaseActivity extends AppCompatActivity {
     }
     //本次使用的开始时间
     protected String getThisUseStartTime(){
-        return newstart==null?firstopentime:newstart;
+        return starttime;
     }
     //设定前一天的日期
     protected void setDate(){
@@ -145,6 +141,4 @@ public class BaseActivity extends AppCompatActivity {
             date--;
         }
     }
-
-
 }

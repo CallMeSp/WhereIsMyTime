@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/colorPrimary">
+            app:contentScrim="@android:color/holo_blue_bright">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
