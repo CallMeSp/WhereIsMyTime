@@ -20,7 +20,7 @@ import java.util.Date;
 /**
  * Created by Administrator on 2017/3/12.
  */
-
+//实现锁屏监听相关功能
 public class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = "BaseActivity";
@@ -85,6 +85,7 @@ public class BaseActivity extends AppCompatActivity {
                 info.setCount(count);
                 dbHelper.insert(info);
                 cursor.requery();
+                TimeUseCount.clear();
                 count=0;
             }
         });

@@ -41,6 +41,7 @@
             android:gravity="center"
             android:paddingTop="10dp"
             android:textStyle="bold"
+            android:text="hello world! "
             android:textColor="@android:color/white"
             android:layout_below="@+id/today_count" />
     </RelativeLayout>

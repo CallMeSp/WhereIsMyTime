@@ -3,6 +3,24 @@
 
     <item
         is-multidex="false"
+        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\libs\open_sdk_r5785.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="174d5b56a80a73d36041056613f0a4b36542588d">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\open_sdk_r5785_4e85b6524e28b6e91043cc394941cfdfd0aeefaf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\libs\mta-sdk-1.6.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c184c69f43b1fe46390f7123717c65bd844bccb6">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\mta-sdk-1.6.2_49efa30d8d71189d7df59ebd5ce666cb58efcb00.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -12,21 +30,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.jakewharton\butterknife\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a07818a1ecabdb149998823429cce555af4b9cba">
-        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.jakewharton-butterknife-8.4.0_10e5e698ef5f263b39c13890a4f7ea315c4d339c.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
         <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.1.0_2fea1408d6ef812a140545351e7240905b0caf52.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.jakewharton\butterknife\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a07818a1ecabdb149998823429cce555af4b9cba">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.jakewharton-butterknife-8.4.0_10e5e698ef5f263b39c13890a4f7ea315c4d339c.jar" />
     </item>
     <item
         is-multidex="false"

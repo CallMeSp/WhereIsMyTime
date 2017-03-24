@@ -18,6 +18,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    freeline{
+        extraResourceDependencyPaths = ['/C/Users/Administrator/AndroidStudioProjects/MyApplication/app/build/freeline/app/backup/res/valuesfreeline_id_keeper_public.xml/']
+    }
 }
 
 dependencies {

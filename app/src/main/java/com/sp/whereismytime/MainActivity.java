@@ -17,11 +17,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sp.whereismytime.adapter.MainRecyclerAdapter;
 import com.sp.whereismytime.base.BaseActivity;
 import com.sp.whereismytime.base.LogUtil;
+import com.tencent.connect.UserInfo;
+import com.tencent.connect.auth.QQToken;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 
 import java.util.ArrayList;
 
@@ -30,19 +36,23 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "MainActivity";
     private MainRecyclerAdapter adapter;
     private ArrayList<String> list=new ArrayList<>();
+    private Tencent mTencent;
+    private IUiListener listener;
     @BindView(R.id.img_background)ImageView imageView;
     @BindView(R.id.today_count)TextView textView_count;
     @BindView(R.id.thisusetate)TextView textView_thisusestate;
     @BindView(R.id.recyclerview)RecyclerView recyclerView;
+    //@BindView(R.id.imageView_head) ImageView avatar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         Glide.with(this)
-                .load(R.drawable.background)
+                .load(R.mipmap.background)
                 .into(imageView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,6 +79,63 @@ public class MainActivity extends BaseActivity
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        //QQ登陆
+        mTencent=Tencent.createInstance("222222",getApplicationContext());
+        //doLogin();
+
+
+        /*avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doLogin();
+            }
+        });*/
+    }
+    private void doLogin(){
+        listener= new IUiListener() {
+            @Override
+            public void onComplete(Object o) {
+                LogUtil.log(TAG,"login complete"+o.toString());
+                Toast.makeText(MainActivity.this,"!!!!!!!!!!",Toast.LENGTH_SHORT).show();
+
+                QQToken qqToken = mTencent.getQQToken();
+                UserInfo info = new UserInfo(getApplicationContext(), qqToken);
+                info.getUserInfo(new IUiListener() {
+                    @Override
+                    public void onComplete(Object o) {
+                        LogUtil.log(TAG,"get complete"+o.toString());
+                    }
+
+                    @Override
+                    public void onError(UiError uiError) {
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
+
+            }
+            @Override
+            public void onError(UiError uiError) {
+                LogUtil.log(TAG,"login error");
+            }
+
+            @Override
+            public void onCancel() {
+                LogUtil.log(TAG,"login cancle");
+            }
+        };
+        mTencent.login(this, "all",listener);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // 官方文档没没没没没没没没没没没这句代码, 但是很很很很很很重要, 不然不会回调!
+        Tencent.onActivityResultData(requestCode, resultCode, data,listener);
+        Tencent.handleResultData(data,listener);
     }
     @Override
     public void onBackPressed() {
@@ -110,21 +177,18 @@ public class MainActivity extends BaseActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_manage) {
-
+        if (id == R.id.nav_history) {
+            ShowHistoryActivity.Start(this);
+        } else if (id == R.id.nav_setting) {
+            SettingActivity.Start(this);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-
     }
     @Override
     protected void onResume() {
@@ -148,5 +212,10 @@ public class MainActivity extends BaseActivity
             }
         });
         numanimator.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

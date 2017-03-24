@@ -40,7 +40,7 @@
                     android:textSize="18sp"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:text="时间去哪了"/>
+                    android:text="时间去哪了     "/>
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
