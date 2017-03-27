@@ -1,13 +1,18 @@
 package com.sp.whereismytime.base;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.sp.whereismytime.KeepAliveActivity;
+import com.sp.whereismytime.Service.ConnectToServer;
 import com.sp.whereismytime.adapter.DBHelper;
 import com.sp.whereismytime.model.OneDayInfo;
 
@@ -42,6 +47,22 @@ public class BaseActivity extends AppCompatActivity {
     private DBHelper dbHelper;
 
     private Cursor cursor;
+
+    private ConnectToServer.MyBinder binder;
+
+    private ServiceConnection connection=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LogUtil.log(TAG,"onServiceConnected");
+            binder=(ConnectToServer.MyBinder)service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            LogUtil.log(TAG,"onDisconnected");
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LogUtil.log(TAG,"oncreate");
@@ -67,8 +88,15 @@ public class BaseActivity extends AppCompatActivity {
                     endtime=getCurrentTime();
                 }
                 TimeUseCount.add("from: "+starttime+" to: "+endtime);
+
+                OneDayInfo info=new OneDayInfo();
+                info.setDate(getDate());
+                info.setCount(getCount());
+                binder.SynchronizeToServere(info);
+
                 LogUtil.log(TAG,"OFF!!!!!!!!!!!!!!!!!!!!!!!"+"  this use:"+starttime+"  "+endtime+"  size"+TimeUseCount.size());
                 KeepAliveActivity.Start(context);
+
             }
             @Override
             public void onUserPresent() {
@@ -89,6 +117,8 @@ public class BaseActivity extends AppCompatActivity {
                 count=0;
             }
         });
+        Intent service=new Intent(this,ConnectToServer.class);
+        bindService(service,connection,BIND_AUTO_CREATE);
     }
     @Override
     protected void onDestroy() {
@@ -141,5 +171,12 @@ public class BaseActivity extends AppCompatActivity {
         }else {
             date--;
         }
+    }
+    protected String getDate(){
+        Calendar calendar=Calendar.getInstance();
+        int y=calendar.get(Calendar.YEAR);
+        int m=calendar.get(Calendar.MONTH)+1;
+        int d=calendar.get(Calendar.DATE);
+        return ""+y+(m>10?m:"0"+m)+(d>10?d:"0"+d);
     }
 }

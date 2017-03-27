@@ -1,8 +1,11 @@
 package com.sp.whereismytime;
 
 import android.animation.ValueAnimator;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,15 +23,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
+import com.sp.whereismytime.Service.ConnectToServer;
 import com.sp.whereismytime.adapter.MainRecyclerAdapter;
 import com.sp.whereismytime.base.BaseActivity;
+import com.sp.whereismytime.base.Constants;
 import com.sp.whereismytime.base.LogUtil;
+import com.sp.whereismytime.model.OneDayInfo;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -36,16 +48,21 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static boolean isLogin=false;
     private static final String TAG = "MainActivity";
     private MainRecyclerAdapter adapter;
     private ArrayList<String> list=new ArrayList<>();
     private Tencent mTencent;
     private IUiListener listener;
+    private ImageView avatar;
+    private Socket socket=null;
     @BindView(R.id.img_background)ImageView imageView;
     @BindView(R.id.today_count)TextView textView_count;
     @BindView(R.id.thisusetate)TextView textView_thisusestate;
     @BindView(R.id.recyclerview)RecyclerView recyclerView;
-    //@BindView(R.id.imageView_head) ImageView avatar;
+    @BindView(R.id.nav_view)NavigationView navigationView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,22 +99,31 @@ public class MainActivity extends BaseActivity
 
         //QQ登陆
         mTencent=Tencent.createInstance("222222",getApplicationContext());
-        //doLogin();
 
-
-        /*avatar.setOnClickListener(new View.OnClickListener() {
+        View headView=navigationView.getHeaderView(0);
+        avatar=(ImageView)headView.findViewById(R.id.imageView_head);
+        avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doLogin();
             }
-        });*/
+        });
+
+        //连接服务器
+
     }
     private void doLogin(){
         listener= new IUiListener() {
             @Override
             public void onComplete(Object o) {
                 LogUtil.log(TAG,"login complete"+o.toString());
-                Toast.makeText(MainActivity.this,"!!!!!!!!!!",Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject jsonObject=new JSONObject(o.toString());
+                    String openid=jsonObject.getString("openid");
+                    LogUtil.log(TAG,"openid:"+openid);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 QQToken qqToken = mTencent.getQQToken();
                 UserInfo info = new UserInfo(getApplicationContext(), qqToken);
@@ -134,7 +160,8 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // 官方文档没没没没没没没没没没没这句代码, 但是很很很很很很重要, 不然不会回调!
-        Tencent.onActivityResultData(requestCode, resultCode, data,listener);
+        LogUtil.log(TAG,"onActvityResult");
+        //Tencent.onActivityResultData(requestCode, resultCode, data,listener);
         Tencent.handleResultData(data,listener);
     }
     @Override
@@ -183,7 +210,8 @@ public class MainActivity extends BaseActivity
             SettingActivity.Start(this);
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_Syncronize) {
+            //从服务器向客户端同步
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -194,9 +222,10 @@ public class MainActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         makeAnimationTextcount(getCount());
-        LogUtil.log("???",get().toString());
+        LogUtil.log("???",get().toString()+getDate());
         adapter.notifyDataSetChanged();
         textView_thisusestate.setText("本次使用开始时间："+getThisUseStartTime());
+
     }
 
     //数值变化的动画效果
@@ -218,4 +247,5 @@ public class MainActivity extends BaseActivity
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }

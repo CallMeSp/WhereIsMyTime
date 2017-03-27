@@ -4,7 +4,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>
     <application
         android:allowBackup="true"
         android:name=".base.MyApplication"
@@ -50,6 +49,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden">
         </activity>
+        <service android:name=".Service.ConnectToServer"/>
     </application>
 
 </manifest>

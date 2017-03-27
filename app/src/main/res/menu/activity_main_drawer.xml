@@ -16,11 +16,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="分享至朋友圈" />
+                android:title="分享至空间" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_Syncronize"
                 android:icon="@drawable/ic_menu_send"
-                android:title="发送给好友" />
+                android:title="同步" />
         </menu>
     </item>
 
