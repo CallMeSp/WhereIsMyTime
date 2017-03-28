@@ -3,30 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.github.nkzawa\socket.io-client\0.6.0\83de3453382e6c00d5e969ecbad51b8626a47c2e\socket.io-client-0.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="83de3453382e6c00d5e969ecbad51b8626a47c2e">
-        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\socket.io-client-0.6.0_f00beb90c5ada652de1fcced4ce408713432ef02.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\libs\open_sdk_r5785.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="174d5b56a80a73d36041056613f0a4b36542588d">
         <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\open_sdk_r5785_4e85b6524e28b6e91043cc394941cfdfd0aeefaf.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
-        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.1.0_aac905652cb25a8e6bf5ed2fb4a3fc4b98d826fb.jar" />
     </item>
     <item
         is-multidex="false"
@@ -84,48 +66,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.1.0_53c18bc2ef0a743a642684d7111d793084b73d33.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="aee64634871d88a419d59eb743c1258a60f19700">
-        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.1.0_a5e8543ee56c8579f47f279c02a6ffc3736035a3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
-        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.1.0_c68444ed378e84856e35943bd2f603dd3a81b820.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Administrator\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.0\support-annotations-25.1.0.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
         <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\support-annotations-25.1.0_f25d486c6b039feba6449ac28f2eb3d9e1d99bc9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
-        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.1.0_61b85868f7777f82c918b48b93f265def3f96274.jar" />
     </item>
     <item
         is-multidex="false"
@@ -144,15 +90,6 @@
         revision="25.0.2"
         sha1="69206d28966656052a982ceded583abdeb41cf63">
         <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\okhttp-ws-2.4.0_e4396bacce3f23762bade482c57130090c54cd86.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.antfortune.freeline\runtime\0.8.6\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="611bdfa0266e6a0bb9865118c5206b0d992f91d9">
-        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.antfortune.freeline-runtime-0.8.6_e414eff3cce7df8346b48169bdba04bd764ed700.jar" />
     </item>
     <item
         is-multidex="false"
@@ -207,6 +144,69 @@
         revision="25.0.2"
         sha1="ea392375cf9ff59234a82e7928a204215ccc98cd">
         <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\butterknife-annotations-8.4.0_a2a255623276bf6fd1b525dcb3e3c692cac62c3e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.github.nkzawa\socket.io-client\0.6.0\83de3453382e6c00d5e969ecbad51b8626a47c2e\socket.io-client-0.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="83de3453382e6c00d5e969ecbad51b8626a47c2e">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\socket.io-client-0.6.0_f00beb90c5ada652de1fcced4ce408713432ef02.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.1.0_aac905652cb25a8e6bf5ed2fb4a3fc4b98d826fb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.1.0_53c18bc2ef0a743a642684d7111d793084b73d33.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.1.0_a5e8543ee56c8579f47f279c02a6ffc3736035a3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.1.0_c68444ed378e84856e35943bd2f603dd3a81b820.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.1.0_61b85868f7777f82c918b48b93f265def3f96274.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\exploded-aar\com.antfortune.freeline\runtime\0.8.6\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="611bdfa0266e6a0bb9865118c5206b0d992f91d9">
+        <dex dex="C:\Users\Administrator\AndroidStudioProjects\MyApplication\app\build\intermediates\pre-dexed\debug\com.antfortune.freeline-runtime-0.8.6_e414eff3cce7df8346b48169bdba04bd764ed700.jar" />
     </item>
     <item
         is-multidex="false"

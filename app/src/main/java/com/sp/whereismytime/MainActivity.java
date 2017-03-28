@@ -1,11 +1,8 @@
 package com.sp.whereismytime;
 
 import android.animation.ValueAnimator;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,15 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
-import com.sp.whereismytime.Service.ConnectToServer;
+import com.sp.whereismytime.Service.ServiceListener;
 import com.sp.whereismytime.adapter.MainRecyclerAdapter;
-import com.sp.whereismytime.base.BaseActivity;
-import com.sp.whereismytime.base.Constants;
 import com.sp.whereismytime.base.LogUtil;
 import com.sp.whereismytime.model.OneDayInfo;
 import com.tencent.connect.UserInfo;
@@ -40,7 +33,6 @@ import com.tencent.tauth.UiError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -212,6 +204,17 @@ public class MainActivity extends BaseActivity
 
         } else if (id == R.id.nav_Syncronize) {
             //从服务器向客户端同步
+            OneDayInfo oneDayInfo=new OneDayInfo();
+            oneDayInfo.setCount(getCount());
+            oneDayInfo.setDate(getDate());
+            binder.synchronizeToClient(oneDayInfo, new ServiceListener() {
+                @Override
+                public void updateCount(int count) {
+                    LogUtil.log(TAG,"count="+count);
+                    setCount(count);
+                    makeAnimationTextcount(count);
+                }
+            });
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -230,17 +233,22 @@ public class MainActivity extends BaseActivity
 
     //数值变化的动画效果
     private void makeAnimationTextcount(final int count){
-        ValueAnimator numanimator=ValueAnimator.ofInt(0,count);
-        numanimator.setDuration(500);
-        numanimator.setRepeatCount(0);
-        numanimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int current=(int)animation.getAnimatedValue();
-                textView_count.setText(""+current);
+            public void run() {
+                ValueAnimator numanimator=ValueAnimator.ofInt(0,count);
+                numanimator.setDuration(500);
+                numanimator.setRepeatCount(0);
+                numanimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        int current=(int)animation.getAnimatedValue();
+                        textView_count.setText(""+current);
+                    }
+                });
+                numanimator.start();
             }
         });
-        numanimator.start();
     }
 
     @Override
