@@ -2,8 +2,10 @@ package com.sp.whereismytime.Service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
 import com.github.nkzawa.emitter.Emitter;
@@ -14,6 +16,7 @@ import com.sp.whereismytime.base.LogUtil;
 import com.sp.whereismytime.model.OneDayInfo;
 
 import java.net.URISyntaxException;
+import java.util.UUID;
 
 /**
  * Created by Administrator on 2017/3/27.
@@ -24,9 +27,19 @@ public class ConnectToServer extends Service {
     private static final String TAG = "ConnectToServer";
     private Socket socket=null;
     private ServiceListener serviceListener;
+    private SharedPreferences sharedPreferences;
+    private String myuuid="";
     @Override
     public void onCreate() {
         super.onCreate();
+        sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+
+        if (!sharedPreferences.contains("myuuid")) {
+            editor.putString("myuuid", UUID.randomUUID().toString());
+            editor.commit();
+        }
+        myuuid=sharedPreferences.getString("myuuid",null);
         try {
             LogUtil.log(TAG,"start connect to server");
             socket= IO.socket(Constants.ipAddress);
@@ -60,12 +73,11 @@ public class ConnectToServer extends Service {
     public class MyBinder extends Binder{
         public void synchronizeToServere(OneDayInfo info){
             LogUtil.log(TAG,"SynchronizeToServere"+socket.connected());
-            socket.emit("updateInDb","pnotexit",info.getCount(),info.getDate());
+            socket.emit("updateInDb",myuuid,info.getCount(),info.getDate());
         }
         public void synchronizeToClient(OneDayInfo oneDayInfo,final ServiceListener listener){
-            socket.emit("queryFromServer","pnotexit",oneDayInfo.getCount(),oneDayInfo.getDate());
+            socket.emit("queryFromServer",myuuid,oneDayInfo.getCount(),oneDayInfo.getDate());
             serviceListener=listener;
         }
-
     }
 }

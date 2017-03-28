@@ -122,12 +122,12 @@ public class BaseActivity extends AppCompatActivity {
         });
         Intent service=new Intent(this,ConnectToServer.class);
         bindService(service,connection,BIND_AUTO_CREATE);
-
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         observer.shutdownObserver();
+        unbindService(connection);
     }
     //获取系统当前时间
     private String getCurrentTime(){
