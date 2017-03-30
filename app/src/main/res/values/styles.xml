@@ -22,7 +22,7 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="showhistoryActivity" parent="Base.Theme.AppCompat">
+    <style name="showhistoryActivity">
         <item name="colorPrimary">@android:color/holo_blue_bright</item>
         <item name="colorPrimaryDark">@android:color/holo_blue_bright</item>
         <item name="colorAccent">@color/colorAccent</item>

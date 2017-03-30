@@ -227,7 +227,6 @@ public class MainActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         makeAnimationTextcount(getCount());
-        LogUtil.log("???",get().toString()+getDate());
         adapter.notifyDataSetChanged();
         textView_thisusestate.setText("本次使用开始时间："+getThisUseStartTime());
 

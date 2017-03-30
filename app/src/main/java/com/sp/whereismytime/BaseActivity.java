@@ -90,14 +90,44 @@ public class BaseActivity extends AppCompatActivity {
                 if (starttime!=null){
                     endtime=getCurrentTime();
                 }
-                TimeUseCount.add("from: "+starttime+" to: "+endtime);
 
+                //计算本次使用时间
+                String[] s=starttime.split(":");
+                String[] e=endtime.split(":");
+                int hh=Integer.valueOf(e[0])-Integer.valueOf(s[0]);
+                int mm=Integer.valueOf(e[1])-Integer.valueOf(s[1]);
+                int ss=Integer.valueOf(e[2])-Integer.valueOf(s[2]);
+                StringBuffer stringBuffer=new StringBuffer();
+                if (ss!=0){
+                    if (ss<0){
+                        mm--;
+                        ss+=60;
+                    }
+                }
+                if (mm!=0){
+                    if (mm<0){
+                        hh--;
+                        mm+=60;
+                    }
+                }
+                if (hh>0){
+                    stringBuffer.append(hh+"h");
+                }
+                if (mm>0){
+                    stringBuffer.append(mm+"m");
+                }
+                stringBuffer.append(ss+"s");
+
+
+                TimeUseCount.add("从"+starttime+"到"+endtime+" 持续:"+stringBuffer);
+
+                //向服务器同步数据
                 OneDayInfo info=new OneDayInfo();
                 info.setDate(getDate());
                 info.setCount(getCount());
                 binder.synchronizeToServere(info);
 
-                LogUtil.log(TAG,"OFF!!!!!!!!!!!!!!!!!!!!!!!"+"  this use:"+starttime+"  "+endtime+"  size"+TimeUseCount.size());
+                LogUtil.log(TAG,"OFF!!!!!!!!!!!!!!!!!!!!!!!"+"  this use:from:"+starttime+" to:"+endtime+"  last:"+stringBuffer);
                 KeepAliveActivity.Start(context);
 
             }
